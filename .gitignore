@@ -2,3 +2,6 @@
 .idea/
 db.sqlite3
 ChatApp/__pycache__/
+media
+chat/__pycache__/
+chat/migrations

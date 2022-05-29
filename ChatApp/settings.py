@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'channels',
+    'chat.apps.ChatConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +74,36 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ChatApp.wsgi.application'
+ASGI_APPLICATION = "ChatApp.asgi.application"
 
+#############################################
+# DOCKER >>>>>> Start >> Enable Channel Layer
+######################################
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
+
+#############################################
+# DOCKER >>>>>> End
+######################################
+
+
+#############################################
+# Memory >>>>>> Start >> Enable Channel Layer
+######################################
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+#############################################
+# Memory >>>>>> End >> Enable Channel Layer
+######################################
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
